@@ -1,9 +1,9 @@
-export interface IMovie {
+export interface IShow {
   id: number;
   overview: string;
   poster_path: string;
   backdrop_path: string;
-  release_date: string;
-  title: string;
+  first_air_date: string;
+  name: string;
   vote_average: number;
 }

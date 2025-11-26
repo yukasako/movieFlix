@@ -1,3 +1,16 @@
+// import { MoviesPage } from '../Pages/MoviesPage';
+import { Outlet } from 'react-router-dom';
+import Navbar from '../Components/UI/Navbar';
+
 export const MainLayout = () => {
-  return <main>MainLayout</main>;
+  return (
+    <>
+      <Navbar />
+      <main>
+        <section>
+          <Outlet />
+        </section>
+      </main>
+    </>
+  );
 };

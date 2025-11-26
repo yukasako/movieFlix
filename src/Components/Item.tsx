@@ -1,17 +1,43 @@
 import type { IMovie } from '../Models/IMovie';
-import styles from './item.module.css';
+import type { IShow } from '../Models/IShow';
+import Card from './UI/Card';
+import ImageLink from './UI/ImageLink';
+import ItemInfo from './UI/ItemInfo';
 
-function Item({ movie }: { movie: IMovie }) {
-  const img: string = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  return (
-    <section className={styles.card}>
-      <img src={img} alt='' />
-      <div className={styles[`card-body`]}>
-        <h5>{movie.title}</h5>
-        <small>{movie.release_date}</small>
-      </div>
-    </section>
-  );
+type ItemProps = {
+  item: IMovie | IShow;
+};
+
+function isMovie(media: IMovie | IShow): media is IMovie {
+  return (media as IMovie).title !== undefined;
 }
 
+const Item = ({ item }: ItemProps) => {
+  if (isMovie(item)) {
+    const media = item as IMovie;
+    return (
+      <Card>
+        <ImageLink
+          href={`/movies/${media.id}`}
+          imageSrc={media.poster_path}
+          altText={media.title}
+        />
+        <ItemInfo title={media.title} detailText={media.release_date} />
+      </Card>
+    );
+  }
+
+  const media = item as IShow;
+
+  return (
+    <Card>
+      <ImageLink
+        href={`/shows/${media.id}`}
+        imageSrc={media.poster_path}
+        altText={media.name}
+      />
+      <ItemInfo title={media.name} detailText={media.first_air_date} />
+    </Card>
+  );
+};
 export default Item;

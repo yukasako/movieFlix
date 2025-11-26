@@ -1,15 +1,14 @@
 import type { IMovie } from '../Models/IMovie';
-import styles from './gridlist.module.css';
+import type { IShow } from '../Models/IShow';
 import Item from './Item';
 
-function GridList({ movies }: { movies: IMovie[] }) {
+const GridList = ({ items }: { items: IMovie[] | IShow[] }) => {
   return (
-    <section className={styles.grid}>
-      {movies.map((movie) => (
-        <Item key={movie.id} movie={movie}></Item>
+    <section className='grid'>
+      {items.map((item) => (
+        <Item key={item.id} item={item} />
       ))}
     </section>
   );
-}
-
+};
 export default GridList;

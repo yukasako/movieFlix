@@ -1,42 +1,42 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FindMovie } from '../Utilities/FindMovie';
-import type { IMovie } from '../Models/IMovie';
+import { FindShow } from '../Utilities/FindShow';
+import type { IShow } from '../Models/IShow';
 
-export const MoviePage = () => {
-  const [movie, setMovie] = useState<IMovie>();
+export const TVShowPage = () => {
+  const [show, setShow] = useState<IShow>();
   const [backgroundImage, setBackgroundImage] = useState<string>('');
   const [poster, setPoster] = useState<string>('');
   const { id } = useParams();
 
   useEffect(() => {
-    const getMovie = async () => {
-      const found = await FindMovie(`movie/${id}`);
+    const getShow = async () => {
+      const found = await FindShow(`tv/${id}`);
       setBackgroundImage(
         `https://image.tmdb.org/t/p/original/${found.backdrop_path}`
       );
       setPoster(`https://image.tmdb.org/t/p/w500${found.poster_path}`);
-      setMovie(found);
+      setShow(found);
     };
-    getMovie();
+    getShow();
   }, [id]);
 
   return (
     <>
-      <img className='overlay' src={backgroundImage} alt={movie?.title} />
+      <img className='overlay' src={backgroundImage} alt={show?.name} />
 
       <section className='details'>
         <div>
-          <img src={poster} alt={movie?.title} />
+          <img src={poster} alt={show?.name} />
         </div>
         <div className='details-info'>
-          <h2>{movie?.title}</h2>
+          <h2>{show?.name}</h2>
           <p>
             <i className='fas fa-star rating'></i>{' '}
-            {movie?.vote_average.toFixed(1)} / 10
+            {show?.vote_average.toFixed(1)} / 10
           </p>
-          <p className='text-muted'>Release date: {movie?.release_date}</p>
-          <p>{movie?.overview}</p>
+          <p className='text-muted'>Reliese date: {show?.first_air_date}</p>
+          <p>{show?.overview}</p>
         </div>
       </section>
     </>
