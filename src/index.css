@@ -91,6 +91,44 @@ main {
   opacity: 0.4;
 }
 
+/* PAGINANITON */
+.pagination {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pagination button {
+  padding: 0.45rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #1a1a1a;
+  color: #eaeaea;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #2a2a2a;
+  border-color: #777;
+}
+
+.pagination button:active:not(:disabled) {
+  background: #1f1f1f;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pagination span {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
 /* DETAILS PAGE CSS */
 .overlay {
   position: absolute;
