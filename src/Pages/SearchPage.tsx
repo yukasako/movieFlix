@@ -4,7 +4,7 @@ import { SearchMovies } from '../Utilities/SearchMovie';
 import { useState } from 'react';
 import type { IMovie } from '../Models/IMovie';
 
-export const HomePage = () => {
+export const SearchPage = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
 
   const handleSearch = async (searchWord: string) => {

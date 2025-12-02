@@ -6,20 +6,23 @@ import {
 } from 'react-router-dom';
 
 import { MainLayout } from './Layouts/MainLayout';
-import { HomePage } from './Pages/HomePage';
+import { SearchPage } from './Pages/SearchPage';
 import { MoviesPage } from './Pages/MoviesPage';
 import { TVShowsPage } from './Pages/TVShowsPage';
 import { MoviePage } from './Pages/MoviePage';
 import { TVShowPage } from './Pages/TVShowPage';
+import { MyListPage } from './Pages/MyListPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<MainLayout />}>
-      <Route index element={<HomePage />} />
+      <Route index element={<MoviesPage />} />
       <Route path='/movies' element={<MoviesPage />} />
       <Route path='/movies/:id' element={<MoviePage />} />
       <Route path='/shows' element={<TVShowsPage />} />
       <Route path='/shows/:id' element={<TVShowPage />} />
+      <Route path='/search' element={<SearchPage />} />
+      <Route path='/myList/' element={<MyListPage />} />
     </Route>
   )
 );

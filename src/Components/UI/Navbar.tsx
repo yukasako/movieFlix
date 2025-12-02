@@ -18,18 +18,23 @@ const Navbar = () => {
               </label>
             </li>
             <li className={styles.menuItem}>
-              <NavLink className={activeClass} to='/'>
-                Home
-              </NavLink>
-            </li>
-            <li className={styles.menuItem}>
               <NavLink className={activeClass} to='/movies'>
                 Films
               </NavLink>
             </li>
-            <li id='orders' className={styles.menuItem}>
+            <li className={styles.menuItem}>
               <NavLink className={activeClass} to='/shows'>
                 Series
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <NavLink className={activeClass} to='/search'>
+                Search
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <NavLink className={activeClass} to='/myList'>
+                Favorites
               </NavLink>
             </li>
           </ul>
