@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { FormEvent } from 'react';
 
 type SearchProps = {
@@ -13,10 +13,8 @@ export const Search = ({ onSearch }: SearchProps) => {
     onSearch(text);
   };
 
-  useEffect(() => {}, []);
-
   return (
-    <section className='container'>
+    <section className='search-container'>
       <form onSubmit={handleSubmit}>
         <div className='search'>
           <input
