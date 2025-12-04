@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { IMovie } from '../Models/IMovie';
-import { LoadMovies } from '../Utilities/LoadMovies';
 import { Pagination } from '../Components/Pagination';
 import GridList from '../Components/GridList';
+import { LoadMedia, type MediaResponse } from '../Utilities/LoadMedia';
 
 export const MoviesPage = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -14,7 +14,10 @@ export const MoviesPage = () => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
-        const data = await LoadMovies('discover/movie', page);
+        const data: MediaResponse<IMovie> = await LoadMedia(
+          'discover/movie',
+          page
+        );
         setMovies(data.results);
         setTotalPages(data.total_pages);
       } finally {

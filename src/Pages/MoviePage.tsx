@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FindMovie } from '../Utilities/FindMovie';
+import { FindMediaById } from '../Utilities/FindMediaById';
 import type { IMovie } from '../Models/IMovie';
 
 export const MoviePage = () => {
@@ -11,7 +11,7 @@ export const MoviePage = () => {
 
   useEffect(() => {
     const getMovie = async () => {
-      const found = await FindMovie(`movie/${id}`);
+      const found = await FindMediaById<IMovie>(`movie/${id}`);
       setBackgroundImage(
         `https://image.tmdb.org/t/p/original/${found.backdrop_path}`
       );

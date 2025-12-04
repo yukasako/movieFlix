@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FindShow } from '../Utilities/FindShow';
+import { FindMediaById } from '../Utilities/FindMediaById';
 import type { IShow } from '../Models/IShow';
 
 export const TVShowPage = () => {
@@ -11,7 +11,7 @@ export const TVShowPage = () => {
 
   useEffect(() => {
     const getShow = async () => {
-      const found = await FindShow(`tv/${id}`);
+      const found = await FindMediaById<IShow>(`tv/${id}`);
       setBackgroundImage(
         `https://image.tmdb.org/t/p/original/${found.backdrop_path}`
       );

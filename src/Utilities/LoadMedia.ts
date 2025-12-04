@@ -1,17 +1,16 @@
 import axios from 'axios';
-import type { IMovie } from '../Models/IMovie';
 
-export interface MoviesResponse {
-  results: IMovie[];
+export interface MediaResponse<T> {
+  results: T[]; // Generic. IMedia[] or IShow[]
   page: number;
   total_pages: number;
   total_results: number;
 }
 
-export const LoadMovies = async (
+export const LoadMedia = async <T>(
   endpoint: string,
   page: number = 1
-): Promise<MoviesResponse> => {
+): Promise<MediaResponse<T>> => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const key = import.meta.env.VITE_API_KEY;
   const lang = import.meta.env.VITE_LANGUAGE;
