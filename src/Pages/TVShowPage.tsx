@@ -23,11 +23,15 @@ export const TVShowPage = () => {
 
   return (
     <>
-      <img className='overlay' src={backgroundImage} alt={show?.name} />
+      <img
+        className='overlay'
+        src={backgroundImage || undefined}
+        alt={show?.name}
+      />
 
       <section className='details'>
         <div>
-          <img src={poster} alt={show?.name} />
+          <img src={poster || undefined} alt={show?.name} />
         </div>
         <div className='details-info'>
           <h2>{show?.name}</h2>

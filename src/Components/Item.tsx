@@ -28,7 +28,6 @@ const Item = ({ item }: ItemProps) => {
   }
 
   const media = item as IShow;
-
   return (
     <Card>
       <ImageLink

@@ -1,6 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 
+type NavbarProps = {
+  isActive: boolean;
+};
+
 const activeClass = ({ isActive }: NavbarProps) =>
   isActive ? styles.active : '';
 
@@ -44,7 +48,3 @@ const Navbar = () => {
   );
 };
 export default Navbar;
-
-type NavbarProps = {
-  isActive: boolean;
-};

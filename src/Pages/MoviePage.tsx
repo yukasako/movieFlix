@@ -23,11 +23,15 @@ export const MoviePage = () => {
 
   return (
     <>
-      <img className='overlay' src={backgroundImage} alt={movie?.title} />
+      <img
+        className='overlay'
+        src={backgroundImage || undefined}
+        alt={movie?.title}
+      />
 
       <section className='details'>
         <div>
-          <img src={poster} alt={movie?.title} />
+          <img src={poster || undefined} alt={movie?.title} />
         </div>
         <div className='details-info'>
           <h2>{movie?.title}</h2>

@@ -17,12 +17,7 @@ export const LoadMovies = async (
   const lang = import.meta.env.VITE_LANGUAGE;
 
   const url = `${baseUrl}${endpoint}?api_key=${key}&language=${lang}&page=${page}`;
-
   const { data } = await axios.get(url);
-
-  console.log('Endpoint', endpoint);
-  console.log(url);
-  console.log(data);
 
   return {
     results: data.results,
