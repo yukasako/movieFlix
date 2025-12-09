@@ -8,7 +8,7 @@ export interface MediaResponse<T> {
 }
 
 export const LoadMedia = async <T>(
-  endpoint: string,
+  endpoint: string, // "discover/movie" or "discover/tv"
   page: number = 1
 ): Promise<MediaResponse<T>> => {
   const baseUrl = import.meta.env.VITE_BASE_URL;

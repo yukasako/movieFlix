@@ -2,15 +2,15 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 
 type SearchProps = {
-  onSearch: (searchWord: string) => void;
+  inputSearchText: (searchWord: string) => void;
 };
 
-export const Search = ({ onSearch }: SearchProps) => {
+export const Search = ({ inputSearchText }: SearchProps) => {
   const [text, setText] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSearch(text);
+    inputSearchText(text);
   };
 
   return (
