@@ -55,12 +55,6 @@ main {
   gap: 1.25rem;
 }
 
-/* .grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 50%), 1fr));
-} */
-
 .card {
   background: var(--card-background-color);
   padding: 0.4rem;
