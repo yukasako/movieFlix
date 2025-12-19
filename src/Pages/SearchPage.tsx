@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import type { IMovie } from '../Models/IMovie';
 import type { IShow } from '../Models/IShow';
 import GridList from '../Components/GridList';
+import { useLanguage } from '../contexts/LanguageContext';
 
 type SearchType = 'movie' | 'tv';
 
@@ -11,6 +12,7 @@ export const SearchPage = () => {
   const [mediaList, setMediaList] = useState<IMovie[] | IShow[]>([]);
   const [searchType, setSearchType] = useState<SearchType>('movie');
   const [searchWord, setSearchWord] = useState<string>('');
+  const { language } = useLanguage();
 
   const handleSearchType = (type: SearchType) => {
     setSearchType(type);
@@ -25,16 +27,20 @@ export const SearchPage = () => {
 
     const fetchData = async () => {
       if (searchType === 'movie') {
-        const data = await SearchMedia<IMovie>('search/movie', searchWord);
+        const data = await SearchMedia<IMovie>(
+          'search/movie',
+          searchWord,
+          language
+        );
         setMediaList(data.results);
       } else {
-        const data = await SearchMedia<IShow>('search/tv', searchWord);
+        const data = await SearchMedia<IShow>('search/tv', searchWord, language);
         setMediaList(data.results);
       }
     };
 
     fetchData();
-  }, [searchType, searchWord]);
+  }, [searchType, searchWord, language]);
 
   return (
     <>

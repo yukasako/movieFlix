@@ -9,11 +9,12 @@ export interface MediaResponse<T> {
 
 export const LoadMedia = async <T>(
   endpoint: string, // "discover/movie" or "discover/tv"
-  page: number = 1
+  page: number = 1,
+  language?: string
 ): Promise<MediaResponse<T>> => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const key = import.meta.env.VITE_API_KEY;
-  const lang = import.meta.env.VITE_LANGUAGE;
+  const lang = language ?? import.meta.env.VITE_LANGUAGE;
 
   const url = `${baseUrl}${endpoint}?api_key=${key}&language=${lang}&page=${page}`;
   const { data } = await axios.get(url);

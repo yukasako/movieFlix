@@ -8,6 +8,7 @@ import {
   isShowFavorite,
   removeFavoriteShow,
 } from '../Utilities/Favorites';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const TVShowPage = () => {
   const [show, setShow] = useState<IShow>();
@@ -15,10 +16,11 @@ export const TVShowPage = () => {
   const [poster, setPoster] = useState<string>('');
   const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
+  const { language } = useLanguage();
 
   useEffect(() => {
     const getShow = async () => {
-      const found = await FindMediaById<IShow>(`tv/${id}`);
+      const found = await FindMediaById<IShow>(`tv/${id}`, language);
       setBackgroundImage(
         `https://image.tmdb.org/t/p/original/${found.backdrop_path}`
       );
@@ -27,7 +29,7 @@ export const TVShowPage = () => {
       setIsFavorite(isShowFavorite(found.id));
     };
     getShow();
-  }, [id]);
+  }, [id, language]);
 
   const handleToggleFavorite = () => {
     if (!show) {

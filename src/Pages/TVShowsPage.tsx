@@ -4,18 +4,24 @@ import GridList from '../Components/GridList';
 import { Pagination } from '../Components/Pagination';
 import type { MediaResponse } from '../Utilities/LoadMedia';
 import { LoadMedia } from '../Utilities/LoadMedia';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const TVShowsPage = () => {
   const [shows, setShows] = useState<IShow[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const fetchShows = async () => {
       setLoading(true);
       try {
-        const data: MediaResponse<IShow> = await LoadMedia('discover/tv', page);
+        const data: MediaResponse<IShow> = await LoadMedia(
+          'discover/tv',
+          page,
+          language
+        );
         setShows(data.results);
         setTotalPages(data.total_pages);
       } finally {
@@ -24,7 +30,7 @@ export const TVShowsPage = () => {
     };
 
     fetchShows();
-  }, [page]);
+  }, [page, language]);
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);

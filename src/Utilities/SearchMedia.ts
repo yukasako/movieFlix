@@ -9,11 +9,12 @@ export interface MoviesResponse<T> {
 
 export const SearchMedia = async <T>(
   endpoint: string, // "search/movie" or "search/tv"
-  searchQuery = ''
+  searchQuery = '',
+  language?: string
 ): Promise<MoviesResponse<T>> => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const key = import.meta.env.VITE_API_KEY;
-  const lang = import.meta.env.VITE_LANGUAGE;
+  const lang = language ?? import.meta.env.VITE_LANGUAGE;
 
   const url = `${baseUrl}${endpoint}?api_key=${key}&query=${searchQuery}&language=${lang}`;
   const { data } = await axios.get(url);

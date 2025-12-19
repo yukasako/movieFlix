@@ -8,6 +8,7 @@ import {
   removeFavoriteMovie,
 } from '../Utilities/Favorites';
 import FavoriteButton from '../Components/UI/FavoriteButton';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const MoviePage = () => {
   const [movie, setMovie] = useState<IMovie>();
@@ -15,10 +16,11 @@ export const MoviePage = () => {
   const [poster, setPoster] = useState<string>('');
   const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
+  const { language } = useLanguage();
 
   useEffect(() => {
     const getMovie = async () => {
-      const found = await FindMediaById<IMovie>(`movie/${id}`);
+      const found = await FindMediaById<IMovie>(`movie/${id}`, language);
       setBackgroundImage(
         `https://image.tmdb.org/t/p/original/${found.backdrop_path}`
       );
@@ -27,7 +29,7 @@ export const MoviePage = () => {
       setIsFavorite(isMovieFavorite(found.id));
     };
     getMovie();
-  }, [id]);
+  }, [id, language]);
 
   const handleToggleFavorite = () => {
     if (!movie) {
