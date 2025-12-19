@@ -1,4 +1,4 @@
-import { fetchViaProxy } from './ApiProxy';
+import axios from 'axios';
 
 export interface MediaResponse<T> {
   results: T[]; // Generic. IMedia[] or IShow[]
@@ -12,10 +12,17 @@ export const LoadMedia = async <T>(
   page: number = 1,
   language?: string
 ): Promise<MediaResponse<T>> => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const key = import.meta.env.VITE_API_KEY;
   const lang = language ?? import.meta.env.VITE_LANGUAGE;
 
-  return fetchViaProxy<MediaResponse<T>>(endpoint, {
-    page,
-    language: lang,
-  });
+  const url = `${baseUrl}${endpoint}?api_key=${key}&language=${lang}&page=${page}`;
+  const { data } = await axios.get(url);
+
+  return {
+    results: data.results,
+    page: data.page,
+    total_pages: Math.min(data.total_pages, 500), // ← 無料APIは500まで
+    total_results: data.total_results,
+  };
 };
