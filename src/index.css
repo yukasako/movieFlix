@@ -91,6 +91,10 @@ main {
   opacity: 0.4;
 }
 
+.center {
+  text-align: center;
+}
+
 /* PAGINANITON */
 .pagination {
   margin: 2rem 0;
@@ -209,9 +213,12 @@ main {
 .details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
-  margin: 3rem 0 2rem;
+  margin: 3rem auto 2rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .details img {

@@ -18,7 +18,9 @@ export const FavoritePage = () => {
     <>
       <h1 className='page-title'>{t('favorites.title')}</h1>
 
-      {!hasFavorites && <p className='text-muted'>{t('favorites.empty')}</p>}
+      {!hasFavorites && (
+        <p className='text-muted center'>{t('favorites.empty')}</p>
+      )}
 
       {hasMovies && (
         <section className='favorites-group'>
