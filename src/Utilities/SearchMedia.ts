@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { fetchViaProxy } from './ApiProxy';
 
 export interface MoviesResponse<T> {
   results: T[]; //IMovie[] or IShow[]
@@ -12,17 +12,10 @@ export const SearchMedia = async <T>(
   searchQuery = '',
   language?: string
 ): Promise<MoviesResponse<T>> => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
-  const key = import.meta.env.VITE_API_KEY;
   const lang = language ?? import.meta.env.VITE_LANGUAGE;
 
-  const url = `${baseUrl}${endpoint}?api_key=${key}&query=${searchQuery}&language=${lang}`;
-  const { data } = await axios.get(url);
-
-  return {
-    results: data.results,
-    page: data.page,
-    total_pages: Math.min(data.total_pages, 500), // ← 無料APIは500まで
-    total_results: data.total_results,
-  };
+  return fetchViaProxy<MoviesResponse<T>>(endpoint, {
+    query: searchQuery || undefined,
+    language: lang,
+  });
 };
