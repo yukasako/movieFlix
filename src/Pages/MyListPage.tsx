@@ -1,7 +1,11 @@
+import { useTranslation } from 'react-i18next';
+
 export const MyListPage = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <h1>Favourite List</h1>
+      <h1>{t('favorites.title')}</h1>
     </>
   );
 };

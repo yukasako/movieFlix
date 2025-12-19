@@ -5,6 +5,7 @@ import { Pagination } from '../Components/Pagination';
 import type { MediaResponse } from '../Utilities/LoadMedia';
 import { LoadMedia } from '../Utilities/LoadMedia';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export const TVShowsPage = () => {
   const [shows, setShows] = useState<IShow[]>([]);
@@ -12,6 +13,7 @@ export const TVShowsPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const { language } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchShows = async () => {
@@ -41,7 +43,7 @@ export const TVShowsPage = () => {
 
   return (
     <>
-      <h1 className='page-title'>Popular TV Series</h1>
+      <h1 className='page-title'>{t('shows.title')}</h1>
 
       <Pagination
         page={page}
@@ -50,7 +52,7 @@ export const TVShowsPage = () => {
         onNext={handleNext}
       />
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t('common.loading')}</p>}
       <GridList items={shows} />
 
       <Pagination

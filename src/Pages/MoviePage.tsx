@@ -9,6 +9,7 @@ import {
 } from '../Utilities/Favorites';
 import FavoriteButton from '../Components/UI/FavoriteButton';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export const MoviePage = () => {
   const [movie, setMovie] = useState<IMovie>();
@@ -17,6 +18,7 @@ export const MoviePage = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
   const { language } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getMovie = async () => {
@@ -64,7 +66,9 @@ export const MoviePage = () => {
             <i className='fas fa-star rating'></i>{' '}
             {movie?.vote_average.toFixed(1)} / 10
           </p>
-          <p className='text-muted'>Release date: {movie?.release_date}</p>
+          <p className='text-muted'>
+            {t('details.movieRelease')}: {movie?.release_date}
+          </p>
           <p>{movie?.overview}</p>
           <FavoriteButton
             isActive={isFavorite}

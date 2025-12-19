@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type SearchProps = {
   inputSearchText: (searchWord: string) => void;
@@ -7,6 +8,7 @@ type SearchProps = {
 
 export const Search = ({ inputSearchText }: SearchProps) => {
   const [text, setText] = useState('');
+  const { t } = useTranslation();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ export const Search = ({ inputSearchText }: SearchProps) => {
         <div className='search'>
           <input
             type='text'
-            placeholder='Search keyword...'
+            placeholder={t('search.placeholder')}
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

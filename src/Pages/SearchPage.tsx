@@ -5,6 +5,7 @@ import type { IMovie } from '../Models/IMovie';
 import type { IShow } from '../Models/IShow';
 import GridList from '../Components/GridList';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 type SearchType = 'movie' | 'tv';
 
@@ -13,6 +14,7 @@ export const SearchPage = () => {
   const [searchType, setSearchType] = useState<SearchType>('movie');
   const [searchWord, setSearchWord] = useState<string>('');
   const { language } = useLanguage();
+  const { t } = useTranslation();
 
   const handleSearchType = (type: SearchType) => {
     setSearchType(type);
@@ -44,7 +46,7 @@ export const SearchPage = () => {
 
   return (
     <>
-      <h1 className='page-title'>Search Movie</h1>
+      <h1 className='page-title'>{t('search.title')}</h1>
 
       <div className='search-toggle'>
         <button
@@ -52,14 +54,14 @@ export const SearchPage = () => {
           className={searchType === 'movie' ? 'active' : ''}
           onClick={() => handleSearchType('movie')}
         >
-          Movie
+          {t('search.toggleMovie')}
         </button>
         <button
           type='button'
           className={searchType === 'tv' ? 'active' : ''}
           onClick={() => handleSearchType('tv')}
         >
-          TV
+          {t('search.toggleTv')}
         </button>
       </div>
 

@@ -9,6 +9,7 @@ import {
   removeFavoriteShow,
 } from '../Utilities/Favorites';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export const TVShowPage = () => {
   const [show, setShow] = useState<IShow>();
@@ -17,6 +18,7 @@ export const TVShowPage = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
   const { language } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getShow = async () => {
@@ -64,7 +66,9 @@ export const TVShowPage = () => {
             <i className='fas fa-star rating'></i>{' '}
             {show?.vote_average.toFixed(1)} / 10
           </p>
-          <p className='text-muted'>Release date: {show?.first_air_date}</p>
+          <p className='text-muted'>
+            {t('details.showRelease')}: {show?.first_air_date}
+          </p>
           <p>{show?.overview}</p>
           <FavoriteButton
             isActive={isFavorite}

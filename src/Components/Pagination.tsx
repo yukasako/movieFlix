@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 type Props = {
   page: number;
   totalPages: number;
@@ -6,10 +8,12 @@ type Props = {
 };
 
 export const Pagination = ({ page, totalPages, onPrev, onNext }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <div className='pagination'>
       <button onClick={onPrev} disabled={page === 1}>
-        &laquo; Prev
+        {t('common.paginationPrev')}
       </button>
 
       <span>
@@ -17,7 +21,7 @@ export const Pagination = ({ page, totalPages, onPrev, onNext }: Props) => {
       </span>
 
       <button onClick={onNext} disabled={page === totalPages}>
-        Next &raquo;
+        {t('common.paginationNext')}
       </button>
     </div>
   );

@@ -4,6 +4,7 @@ import { Pagination } from '../Components/Pagination';
 import GridList from '../Components/GridList';
 import { LoadMedia, type MediaResponse } from '../Utilities/LoadMedia';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export const MoviesPage = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -11,6 +12,7 @@ export const MoviesPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const { language } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -41,7 +43,7 @@ export const MoviesPage = () => {
 
   return (
     <>
-      <h1 className='page-title'>Popular Films</h1>
+      <h1 className='page-title'>{t('movies.title')}</h1>
 
       <Pagination
         page={page}
@@ -50,7 +52,7 @@ export const MoviesPage = () => {
         onNext={handleNext}
       />
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t('common.loading')}</p>}
       <GridList items={movies} />
 
       <Pagination

@@ -2,15 +2,18 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from 'react';
-
-type LanguageOption = {
-  code: string;
-  label: string;
-};
+import i18n from '../i18n';
+import {
+  DEFAULT_LANGUAGE,
+  LANGUAGE_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+  type LanguageOption,
+} from '../i18n/config';
 
 type LanguageContextValue = {
   language: string;
@@ -18,22 +21,13 @@ type LanguageContextValue = {
   supportedLanguages: LanguageOption[];
 };
 
-const SUPPORTED_LANGUAGES: LanguageOption[] = [
-  { code: 'en-US', label: 'EN' },
-  { code: 'ja-JP', label: 'JP' },
-];
-
-const STORAGE_KEY = 'movieflix:language';
-const DEFAULT_LANGUAGE =
-  import.meta.env.VITE_LANGUAGE ?? SUPPORTED_LANGUAGES[0].code;
-
 const getInitialLanguage = () => {
   if (typeof window === 'undefined') {
     return DEFAULT_LANGUAGE;
   }
 
   try {
-    return window.localStorage.getItem(STORAGE_KEY) ?? DEFAULT_LANGUAGE;
+    return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) ?? DEFAULT_LANGUAGE;
   } catch {
     return DEFAULT_LANGUAGE;
   }
@@ -55,12 +49,16 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
     if (typeof window !== 'undefined') {
       try {
-        window.localStorage.setItem(STORAGE_KEY, nextLanguage);
+        window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage);
       } catch {
         // ignore storage errors
       }
     }
   }, []);
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const value = useMemo(
     () => ({

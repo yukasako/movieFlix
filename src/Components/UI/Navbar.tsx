@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './navbar.module.css';
 
@@ -11,6 +12,7 @@ const activeClass = ({ isActive }: NavbarProps) =>
 
 const Navbar = () => {
   const { language, setLanguage, supportedLanguages } = useLanguage();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -18,7 +20,10 @@ const Navbar = () => {
         <nav className={styles.navbar}>
           <ul>
             <li className={styles.logo}>MovieFlix</li>
-            <li className={styles.languageToggle} aria-label='Select language'>
+            <li
+              className={styles.languageToggle}
+              aria-label={t('nav.language')}
+            >
               {supportedLanguages.map((option) => (
                 <button
                   key={option.code}
@@ -41,22 +46,22 @@ const Navbar = () => {
             </li>
             <li className={styles.menuItem}>
               <NavLink className={activeClass} to='/movies'>
-                Films
+                {t('nav.movies')}
               </NavLink>
             </li>
             <li className={styles.menuItem}>
               <NavLink className={activeClass} to='/shows'>
-                Series
+                {t('nav.shows')}
               </NavLink>
             </li>
             <li className={styles.menuItem}>
               <NavLink className={activeClass} to='/search'>
-                Search
+                {t('nav.search')}
               </NavLink>
             </li>
             <li className={styles.menuItem}>
               <NavLink className={activeClass} to='/favorite'>
-                Favorites
+                {t('nav.favorites')}
               </NavLink>
             </li>
           </ul>
