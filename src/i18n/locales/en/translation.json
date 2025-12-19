@@ -13,7 +13,7 @@
     "title": "Popular TV Series"
   },
   "search": {
-    "title": "Search Movie",
+    "title": "Search Media",
     "toggleMovie": "Movie",
     "toggleTv": "TV",
     "placeholder": "Search keyword..."
