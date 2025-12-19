@@ -8,6 +8,8 @@ import {
   isShowFavorite,
   removeFavoriteShow,
 } from '../Utilities/Favorites';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export const TVShowPage = () => {
   const [show, setShow] = useState<IShow>();
@@ -15,10 +17,12 @@ export const TVShowPage = () => {
   const [poster, setPoster] = useState<string>('');
   const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
+  const { language } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getShow = async () => {
-      const found = await FindMediaById<IShow>(`tv/${id}`);
+      const found = await FindMediaById<IShow>(`tv/${id}`, language);
       setBackgroundImage(
         `https://image.tmdb.org/t/p/original/${found.backdrop_path}`
       );
@@ -27,7 +31,7 @@ export const TVShowPage = () => {
       setIsFavorite(isShowFavorite(found.id));
     };
     getShow();
-  }, [id]);
+  }, [id, language]);
 
   const handleToggleFavorite = () => {
     if (!show) {
@@ -62,7 +66,9 @@ export const TVShowPage = () => {
             <i className='fas fa-star rating'></i>{' '}
             {show?.vote_average.toFixed(1)} / 10
           </p>
-          <p className='text-muted'>Release date: {show?.first_air_date}</p>
+          <p className='text-muted'>
+            {t('details.showRelease')}: {show?.first_air_date}
+          </p>
           <p>{show?.overview}</p>
           <FavoriteButton
             isActive={isFavorite}

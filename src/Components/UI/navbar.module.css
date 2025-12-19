@@ -111,6 +111,38 @@ nav ul li .menuIcon .navIcon:after {
   top: 0;
 }
 
+.languageToggle {
+  display: flex !important;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-right: 1.5rem;
+}
+
+.languageButton {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-color);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+}
+
+.languageButtonActive {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.languageButton:hover:not(.languageButtonActive) {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 768px) {
   .navbar ul {
@@ -130,5 +162,9 @@ nav ul li .menuIcon .navIcon:after {
 
   .navbar ul li.toggle {
     display: none;
+  }
+
+  .languageToggle {
+    margin-top: 0;
   }
 }

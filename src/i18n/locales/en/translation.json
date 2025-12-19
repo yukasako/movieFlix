@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "movies": "Films",
+    "shows": "Series",
+    "search": "Search",
+    "favorites": "Favorites",
+    "language": "Select language"
+  },
+  "movies": {
+    "title": "Popular Films"
+  },
+  "shows": {
+    "title": "Popular TV Series"
+  },
+  "search": {
+    "title": "Search Media",
+    "toggleMovie": "Movie",
+    "toggleTv": "TV",
+    "placeholder": "Search keyword..."
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "You do not have any favorites yet. Add some from a movie or show detail page.",
+    "moviesHeading": "Favorite Movies",
+    "showsHeading": "Favorite TV Shows"
+  },
+  "details": {
+    "movieRelease": "Release date",
+    "showRelease": "Release date"
+  },
+  "common": {
+    "loading": "Loading...",
+    "paginationPrev": "« Prev",
+    "paginationNext": "Next »"
+  }
+}
