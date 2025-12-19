@@ -2,11 +2,18 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FindMediaById } from '../Utilities/FindMediaById';
 import type { IMovie } from '../Models/IMovie';
+import {
+  addFavoriteMovie,
+  isMovieFavorite,
+  removeFavoriteMovie,
+} from '../Utilities/Favorites';
+import FavoriteButton from '../Components/UI/FavoriteButton';
 
 export const MoviePage = () => {
   const [movie, setMovie] = useState<IMovie>();
   const [backgroundImage, setBackgroundImage] = useState<string>('');
   const [poster, setPoster] = useState<string>('');
+  const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,9 +24,25 @@ export const MoviePage = () => {
       );
       setPoster(`https://image.tmdb.org/t/p/w500${found.poster_path}`);
       setMovie(found);
+      setIsFavorite(isMovieFavorite(found.id));
     };
     getMovie();
   }, [id]);
+
+  const handleToggleFavorite = () => {
+    if (!movie) {
+      return;
+    }
+
+    if (isFavorite) {
+      removeFavoriteMovie(movie.id);
+      setIsFavorite(false);
+      return;
+    }
+
+    addFavoriteMovie(movie);
+    setIsFavorite(true);
+  };
 
   return (
     <>
@@ -41,6 +64,11 @@ export const MoviePage = () => {
           </p>
           <p className='text-muted'>Release date: {movie?.release_date}</p>
           <p>{movie?.overview}</p>
+          <FavoriteButton
+            isActive={isFavorite}
+            disabled={!movie}
+            onToggle={handleToggleFavorite}
+          />
         </div>
       </section>
     </>

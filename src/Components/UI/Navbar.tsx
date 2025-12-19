@@ -37,7 +37,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className={styles.menuItem}>
-              <NavLink className={activeClass} to='/myList'>
+              <NavLink className={activeClass} to='/favorite'>
                 Favorites
               </NavLink>
             </li>

@@ -51,9 +51,15 @@ main {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.25rem;
 }
+
+/* .grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 50%), 1fr));
+} */
 
 .card {
   background: var(--card-background-color);
@@ -230,6 +236,54 @@ main {
 
 .rating {
   color: var(--secondary-color);
+}
+
+/* FAVOURITE */
+.favorite-heart {
+  margin-top: 1.5rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border 0.2s ease, transform 0.2s ease;
+}
+
+.favorite-heart i {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.favorite-heart--active {
+  border-color: var(--primary-color);
+}
+
+.favorite-heart--active i {
+  color: var(--primary-color);
+}
+
+.favorite-heart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.favorite-heart:not(:disabled):hover {
+  transform: scale(1.05);
+  border-color: var(--primary-color);
+}
+
+.favorites-group {
+  margin: 2.5rem 0;
+}
+
+.favorites-group h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .home-links {
